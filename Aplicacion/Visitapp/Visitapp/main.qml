@@ -45,15 +45,6 @@ ApplicationWindow {
         }
     }
 
-    Component.onCompleted: {
-        db = LocalStorage.openDatabaseSync(dbId, dbVersion, dbDescription, dbSize);
-        db.trasanction(function(tx){
-                var sql = "CREATE TABLE IF NO EXISTS PERSONA()";
-                tx.executeSql(sql);
-        });        
-
-    }
-
    // MainForm {
    //    anchors.fill: parent
    //     mouseArea.onClicked: {
