@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MainForm.ui.qml</file>
+        <file>Database.js</file>
+        <file>Persona.js</file>
+        <file>Visita.js</file>
+    </qresource>
+</RCC>
