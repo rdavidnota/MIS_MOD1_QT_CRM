@@ -15,17 +15,25 @@ Item {
         anchors.topMargin: 18
         anchors.top: parent.top
     }
+    
+    ListView {
+     id: visitalist
+     anchors.fill: parent
+     model:ListModel{}
 
-     Calendar { id: fechaini ;x: 179;y: 36}
+     delegate:
+    }
+
+    /* Calendar { id: fechaini ;x: 179;y: 36}
      Calendar{ id: fechafin ;x: 188;y: 100 ; frameVisible: true;navigationBarVisible: true }
-   /*  ComboBox {
+   *//*  ComboBox {
          x: 269
          y: 361
          width: 200
          model: [ "Banana", "Apple", "Coconut" ]
      }*/
 
-     ComboBox {
+    /* ComboBox {
          currentIndex: 2
          model: ListModel {
              id: cbItems
@@ -40,5 +48,5 @@ Item {
         x: 188
         y: 361
         text: qsTr("Aceptar")
-    }
+    }*/
 }

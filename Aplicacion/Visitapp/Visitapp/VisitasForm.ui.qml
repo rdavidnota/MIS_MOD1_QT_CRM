@@ -119,14 +119,36 @@ Item {
         text: qsTr("Visitante")
     }
 
+
     ComboBox {
         id: comboBox1
         x: 260
         y: 256
         width: 193
         height: 26
-        model: [ "Richard Romero", "Raul Nota", "Ariel Palmero" ]
+        model: ListModel {
+            id: model
+            ListElement { text: "Richard Romero list" }
+            ListElement { text: "Raul Nota list" }
+            ListElement { text: "Ariel Palmero list" }
+        }
     }
+
+
+   /* ComboBox {
+        editable: true
+        model: ListModel {
+            id: model
+            ListElement { text: "Banana" }
+            ListElement { text: "Apple" }
+            ListElement { text: "Coconut" }
+        }
+        onAccepted: {
+            if (find(editText) === -1)
+                model.append({text: editText})
+        }
+    }*/
+
 
     ComboBox {
         id: comboBox

@@ -5,6 +5,7 @@ import QtQuick.Controls 2.0
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import "Visita.js" as Visita
+import "Persona.js" as Persona
 import "Database.js" as DB
 
 ApplicationWindow {
@@ -46,13 +47,10 @@ ApplicationWindow {
         }
     }
 
-<<<<<<< HEAD
 
 
     }
 
-=======
->>>>>>> 53afdd7f70b298e585efd4df015dabcc8efad333
    // MainForm {
    //    anchors.fill: parent
    //     mouseArea.onClicked: {
