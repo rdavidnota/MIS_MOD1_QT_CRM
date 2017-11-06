@@ -1,9 +1,15 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>MainForm.ui.qml</file>
         <file>Database.js</file>
         <file>Persona.js</file>
         <file>Visita.js</file>
+        <file>MainForm.ui.qml</file>
+        <file>Visitas.qml</file>
+        <file>VisitasForm.ui.qml</file>
+        <file>Visitar.qml</file>
+        <file>VisitarForm.ui.qml</file>
+        <file>RptVisitas.qml</file>
+        <file>RptVisitasForm.ui.qml</file>
     </qresource>
 </RCC>

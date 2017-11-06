@@ -31,16 +31,18 @@ function insert(fecha, objetivo, alcance, reqnegocio, estado, efectividad, visit
     db.transaction(function(tx){
         tx.executeSql('INSERT INTO VISITA VALUES(NULL,?,?,?,?,?,?);',[fecha, objetivo, alcance, reqnegocio, estado, efectividad])
 
-        var result = tx.executeSql('SELECT last_insert_rowid()')
+        var result = tx.executeSql('SELECT last_insert_rowid();')
         visitaId = result.insertId
 
-        for(var i = 0; i<visitadores.rows.length; i++){
-            tx.executeSql('INSERT INTO VISTADORES VALUES(?,?)',[visitadores.rows.item(i), visitaId])
-        }
+        /*for(var i = 0; i<visitadores.rows.length; i++){
+            tx.executeSql('INSERT INTO VISTADORES VALUES(?,?);',[visitadores.rows.item(i), visitaId])
+        }*/
+         tx.executeSql('INSERT INTO VISTADORES VALUES(?,?);',[visitadores, visitaId])
 
-        for(var i = 0; i<visitados.rows.length; i++){
-            tx.executeSql('INSERT INTO VISITADOS VALUES(?,?)',[visitados.rows.item(i), visitaId])
-        }
+       /* for(var i = 0; i<visitados.rows.length; i++){
+            tx.executeSql('INSERT INTO VISITADOS VALUES(?,?);',[visitados.rows.item(i), visitaId])
+        }*/
+         tx.executeSql('INSERT INTO VISITADOS VALUES(?,?);',[visitados, visitaId])
     });
 }
 
@@ -48,7 +50,7 @@ function update(id, objetivo, alcance, estado, efectividad){
     var db = Db.dbGetHandle();
 
     db.transaction(function(tx){
-        tx.executeSql('UPDATE VISITA SET OBJETIVO =?, ALCANCE =?, ESTADO =?, EFECTIVIDAD =? WHERE ID =?',[objetivo, alcance, estado, efectividad,id])
+        tx.executeSql('UPDATE VISITA SET OBJETIVO =?, ALCANCE =?, ESTADO =?, EFECTIVIDAD =? WHERE ID =?;',[objetivo, alcance, estado, efectividad,id])
     });
 }
 

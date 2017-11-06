@@ -4,6 +4,8 @@ import QtQuick.LocalStorage 2.0
 import QtQuick.Controls 2.0
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
+import "Visita.js" as Visita
+import "Database.js" as DB
 
 ApplicationWindow {
     visible: true
@@ -11,24 +13,23 @@ ApplicationWindow {
     height: 480
     title: qsTr("Visitapp")
 
+
     SwipeView {
         id: swipeView
         anchors.rightMargin: 0
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
-        Page {
-            Label {
-                text: qsTr("Second page")
-                anchors.centerIn: parent
-            }
-        }
-        Page {
-            Label {
-                text: qsTr("Listado  page")
-                anchors.centerIn: parent
-            }
-        }
+        VisitasForm{
+            fecha.text: new Date().toDateString()
+            button.onClicked: {
+                DB.dbInit();
+                Visita.insert(fecha.text,objetivo.text,alcance.text,reqneg.text,estado.textAt(0),efectividad.text ,visitante.textAt(0),visitado.textAt(0))
+                var records = Visita.getAll()
+                console.log(records.length)
 
+        }}
+        VisitarForm{}
+        RptVisitasForm{}
     }
 
     footer:  TabBar {
@@ -45,12 +46,7 @@ ApplicationWindow {
         }
     }
 
-    Component.onCompleted: {
-        db = LocalStorage.openDatabaseSync(dbId, dbVersion, dbDescription, dbSize);
-        db.trasanction(function(tx){
-                var sql = "CREATE TABLE IF NO EXISTS PERSONA()";
-                tx.executeSql(sql);
-        });        
+
 
     }
 
@@ -60,4 +56,4 @@ ApplicationWindow {
    //        console.log(qsTr('Clicked on background. Text: "' + textEdit.text + '"'))
    //     }
    // }
-}
+

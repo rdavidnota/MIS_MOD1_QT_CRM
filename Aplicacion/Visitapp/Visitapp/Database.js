@@ -34,8 +34,7 @@ function dbInit()
 function dbGetHandle()
 {
     try {
-
-        var db  = Sql.LocalStorage.openDatabaseSync(dbId, dbVersion, dbDescription, dbSize);
+       var db  = Sql.LocalStorage.openDatabaseSync(dbId, dbVersion, dbDescription, dbSize);
 
     } catch (err) {
         console.log("Error opening database: " + err)
