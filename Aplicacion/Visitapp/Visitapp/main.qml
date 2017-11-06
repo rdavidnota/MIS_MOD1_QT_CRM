@@ -46,10 +46,13 @@ ApplicationWindow {
         }
     }
 
+<<<<<<< HEAD
 
 
     }
 
+=======
+>>>>>>> 53afdd7f70b298e585efd4df015dabcc8efad333
    // MainForm {
    //    anchors.fill: parent
    //     mouseArea.onClicked: {
