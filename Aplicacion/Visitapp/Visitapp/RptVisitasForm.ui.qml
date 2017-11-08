@@ -2,29 +2,35 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
-import "Persona.js" as Persona
-Item {
-    property alias rowLayout: rowLayout
 
-    RowLayout {
+Item {
+   // property alias rowLayout: rowLayout
+    property alias listavis: listavisitas
+
+  /*  RowLayout {
         id: rowLayout
         width: 305
         height: 413
-        anchors.horizontalCenterOffset: 1
+        anchors.horizontalCenterOffset: -10
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 18
+        anchors.topMargin: 21
         anchors.top: parent.top
-    }
-    
+    }*/
+
+
     ListView {
-     id: visitalist
-     anchors.fill: parent
-     model:ListModel{}
-
-     delegate:
+        id: listavisitas
+        anchors.fill: parent
+        model: ListModel{}
+        delegate: Label {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: 50
+            text: id + ": " + reqneg
+        }
     }
 
-    /* Calendar { id: fechaini ;x: 179;y: 36}
+       /* Calendar { id: fechaini ;x: 179;y: 36}
      Calendar{ id: fechafin ;x: 188;y: 100 ; frameVisible: true;navigationBarVisible: true }
    *//*  ComboBox {
          x: 269

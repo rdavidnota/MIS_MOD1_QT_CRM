@@ -1,7 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
-
+import QtQuick.Dialogs 1.1
 Item {
     property alias rowLayout: rowLayout
     property alias button: button1
@@ -15,6 +15,7 @@ Item {
     property alias visitante: comboBox1
     property alias visitado: comboBox
     property alias estado: comboBox2
+    property alias mensaje: mensaje
 
 
     RowLayout {
@@ -134,6 +135,12 @@ Item {
         }
     }
 
+
+    MessageDialog {
+        id: mensaje
+        title: "May I have your attention please"
+        text: "It's so cool that you are using Qt Quick."
+    }
 
    /* ComboBox {
         editable: true

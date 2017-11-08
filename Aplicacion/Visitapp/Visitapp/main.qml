@@ -14,7 +14,6 @@ ApplicationWindow {
     height: 480
     title: qsTr("Visitapp")
 
-
     SwipeView {
         id: swipeView
         anchors.rightMargin: 0
@@ -27,10 +26,23 @@ ApplicationWindow {
                 Visita.insert(fecha.text,objetivo.text,alcance.text,reqneg.text,estado.textAt(0),efectividad.text ,visitante.textAt(0),visitado.textAt(0))
                 var records = Visita.getAll()
                 console.log(records.length)
+                mensaje.open()
 
         }}
-        VisitarForm{}
-        RptVisitasForm{}
+        VisitarForm{
+        }
+        RptVisitasForm{
+            onParentChanged: {
+            var records = Visita.getAll()
+                for (var i = 0; i < records.length; i++) {
+                  console.log(records[i].id)
+                 listavis.model.append({id: qsTr(records[i].id) /*records[i].id*/,reqneg:"1"/*records[i].reqnegocio*/})
+               // listavis.model.append({id:records.rows.item(12).id,reqneg:records.rows.item(12).reqnegocio})
+               // listavis.model.append({id:records.rows.item(10).id,reqneg:records.rows.item(10).reqnegocio})
+               // listavis.model.append({id:records.rows.item(9).id,reqneg:records.rows.item(9).reqnegocio})
+                }
+
+        }}
     }
 
     footer:  TabBar {
