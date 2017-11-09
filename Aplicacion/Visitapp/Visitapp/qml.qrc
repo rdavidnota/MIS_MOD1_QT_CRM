@@ -11,5 +11,6 @@
         <file>VisitarForm.ui.qml</file>
         <file>RptVisitas.qml</file>
         <file>RptVisitasForm.ui.qml</file>
+        <file>Visitapplogo.PNG</file>
     </qresource>
 </RCC>

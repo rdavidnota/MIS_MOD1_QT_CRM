@@ -1,7 +1,8 @@
 import QtQuick 2.7
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import QtQuick.Dialogs 1.1
+import QtQuick.Dialogs 1.2
+//import QtQuick.Controls 1.4
 Item {
     property alias rowLayout: rowLayout
     property alias button: button1
@@ -16,6 +17,7 @@ Item {
     property alias visitado: comboBox
     property alias estado: comboBox2
     property alias mensaje: mensaje
+    property alias model: model1
 
 
     RowLayout {
@@ -23,25 +25,25 @@ Item {
         width: 305
         height: 481
         visible: true
-        anchors.horizontalCenterOffset: 7
+        anchors.horizontalCenterOffset: -159
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 0
+        anchors.topMargin: -1
         anchors.top: parent.top
     }
 
     TextField {
         id: textField
-        x: 259
-        y: 16
-        width: 183
+        x: 95
+        y: 35
+        width: 194
         height: 26
         text: qsTr("")
     }
 
     Button {
         id: button1
-        x: 274
-        y: 415
+        x: 131
+        y: 410
         width: 82
         height: 25
         text: qsTr("Guardar")        
@@ -49,8 +51,8 @@ Item {
 
     Label {
         id: label
-        x: 188
-        y: 19
+        x: 24
+        y: 35
         width: 47
         height: 19
         text: qsTr("Fecha :")
@@ -58,88 +60,86 @@ Item {
 
     Label {
         id: label1
-        x: 188
-        y: 62
+        x: 24
+        y: 78
         width: 47
         height: 13
         text: qsTr("Objetivo :")
     }
 
-    TextArea {
+    TextField {
         id: textArea
-        x: 259
-        y: 62
-        width: 183
+        x: 95
+        y: 78
+        width: 194
         height: 53
         text: qsTr("")
-        verticalAlignment: Text.AlignTop
     }
 
     Label {
         id: label2
-        x: 188
-        y: 126
+        x: 24
+        y: 142
         width: 55
         height: 13
         text: qsTr("Alcance :")
     }
 
-    TextArea {
+    TextField {
         id: textArea1
-        x: 259
-        y: 126
+        x: 96
+        y: 142
         width: 194
-        height: 45
+        height: 56
         text: qsTr("")
     }
 
     Label {
         id: label3
-        x: 188
-        y: 188
-        text: qsTr("Req. de Ne")
+        x: 24
+        y: 203
+        text: qsTr("Req. de Neg :")
     }
 
-    TextArea {
+    TextField {
         id: textArea2
-        text: qsTr("")
-        anchors.top: rowLayout.bottom
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.bottomMargin: 242
-        anchors.topMargin: -293
-        anchors.rightMargin: 177
-        anchors.leftMargin: 259
+        x: 96
+        y: 203
+        width: 194
+        height: 62
+        text: qsTr("")       
     }
 
     Label {
         id: label4
-        x: 188
-        y: 256
-        text: qsTr("Visitante")
+        x: 24
+        y: 271
+        text: qsTr("Visitante :")
     }
 
 
     ComboBox {
         id: comboBox1
-        x: 260
-        y: 256
+        x: 96
+        y: 271
         width: 193
-        height: 26
+        height: 24
+        textRole: "key"
         model: ListModel {
-            id: model
-            ListElement { text: "Richard Romero list" }
-            ListElement { text: "Raul Nota list" }
-            ListElement { text: "Ariel Palmero list" }
+            id: model1
+            ListElement { key: "Richard Romero";value: 0 }
+            ListElement { key: "Raul Nota" ;value: 1 }
+            ListElement { key: "Ariel Palmero";value: 2 }
         }
     }
 
 
     MessageDialog {
         id: mensaje
-        title: "May I have your attention please"
-        text: "It's so cool that you are using Qt Quick."
+        title: ""
+        text: ""
+        icon: StandardIcon.Question
+
     }
 
    /* ComboBox {
@@ -155,55 +155,80 @@ Item {
                 model.append({text: editText})
         }
     }*/
-
-
     ComboBox {
-        id: comboBox
-        x: 260
-        y: 294
-        width: 193
-        height: 27
-        model: [ "Richard Romero", "Raul Nota", "Ariel Palmero" ]
-    }
+           id: comboBox
+           x: 96
+           y: 309
+           width: 193
+           height: 24
+           textRole: "key"
+           model: ListModel {
+               id: model2
+               ListElement { key: "Richard Romero";value: 0 }
+               ListElement { key: "Raul Nota" ;value: 1 }
+               ListElement { key: "Ariel Palmero";value: 2 }
+           }
+       }
 
     Label {
         id: label5
-        x: 188
-        y: 294
-        text: qsTr("Visitado")
+        x: 24
+        y: 309
+        text: qsTr("Visitado :")
     }
 
     ComboBox {
         id: comboBox2
-        x: 260
-        y: 327
+        x: 96
+        y: 342
         width: 193
-        height: 30
+        height: 24
         model: [ "Pendiente", "Cerrada", "En Proceso" ]
     }
 
     Label {
         id: label6
-        x: 188
-        y: 336
+        x: 24
+        y: 342
         width: 33
         height: 12
-        text: qsTr("Estado")
+        text: qsTr("Estado :")
     }
 
     TextField {
         id: textField1
-        x: 259
-        y: 369
+        x: 95
+        y: 378
         width: 194
-        height: 27
+        height: 26
         text: qsTr("0")
     }
 
     Label {
         id: label7
-        x: 188
-        y: 369
-        text: qsTr("Efectividad")
+        x: 24
+        y: 378
+        text: qsTr("Efectividad :")
     }
+   /* Rectangle{
+        x: 269
+        y: 17
+        width: 105
+        height: 14
+        color: "#000000"*/
+    Text {
+        id: text1
+        x: 88
+        y: 8
+        width: 105
+        height: 18
+        color: "#000000"
+        text: qsTr("Registro de Visitas")
+        font.bold: true
+        styleColor: "#000000"
+        font.pixelSize: 15
+    }
+
+    //}
+
 }

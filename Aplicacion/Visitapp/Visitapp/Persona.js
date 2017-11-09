@@ -13,10 +13,10 @@ function getAll() {
 
         for (var i = 0; i < results.rows.length; i++) {
             var record ={
-                id: results.rows.item(i).id,
-                nombre: results.rows.item(i).nombre,
-                telefono: results.rows.item(i).telefono,
-                correo: results.rows.item(i).correo
+                id: results.rows.item(i).ID,
+                nombre: results.rows.item(i).NOMBRE,
+                telefono: results.rows.item(i).TELEFONO,
+                correo: results.rows.item(i).CORREO
             }
             records.push(record)
         }

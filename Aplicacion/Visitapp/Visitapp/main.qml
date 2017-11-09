@@ -8,10 +8,10 @@ import "Visita.js" as Visita
 import "Persona.js" as Persona
 import "Database.js" as DB
 
-ApplicationWindow {
+ApplicationWindow {    
     visible: true
-    width: 640
-    height: 480
+    width: 350 //650
+    height: 480 //480
     title: qsTr("Visitapp")
 
     SwipeView {
@@ -19,27 +19,52 @@ ApplicationWindow {
         anchors.rightMargin: 0
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
-        VisitasForm{
-            fecha.text: new Date().toDateString()
-            button.onClicked: {
-                DB.dbInit();
-                Visita.insert(fecha.text,objetivo.text,alcance.text,reqneg.text,estado.textAt(0),efectividad.text ,visitante.textAt(0),visitado.textAt(0))
-                var records = Visita.getAll()
-                console.log(records.length)
-                mensaje.open()
-
-        }}
+        //currentIndex: tabBar.currentIndex = 0
         VisitarForm{
         }
+        VisitasForm{
+            Component.onCompleted:
+            {
+              /*cargar combos*/
+                //Persona.insert("Richard Romero","75003602","eromero@cotas.com")
+                //Persona.insert("Raul Nota","76683515","rnota@cotas.com")
+                //Persona.insert("Ariel Palmero","77824712","apalmero@cotas.com")
+
+                //model.clear()
+                //var records = Persona.getAll()
+                // for (var i = 0; i < records.length; i++) {
+                  //console.log(records[i].id)
+                  //console.log(records[i].reqnegocio)
+                //  model.append({ "key": records[i].nombre, "value":records[i].id})
+                // }
+
+            }
+            fecha.text: new Date().toDateString()
+
+            visitado.currentIndex: 0
+            visitante.currentIndex: 2
+            visitante.onFocusChanged:{
+               //   model.clear()
+               //   model.append({ "key": "amigo agregado", "value":4})
+            }
+            button.onClicked: {
+                DB.dbDrop();
+                DB.dbInit();
+                var numvisita = Visita.insert(fecha.text,objetivo.text,alcance.text,reqneg.text,estado.currentText,efectividad.text ,visitante.currentText,visitado.currentText)
+                mensaje.text = "Se registro la visita : " + numvisita + " " + "Satisfactoriamente.."
+                mensaje.title = "Confirmacion"
+                mensaje.visible = true
+                mensaje.open()
+        }}
+
         RptVisitasForm{
-            onParentChanged: {
-            var records = Visita.getAll()
+            onFocusChanged: {
+               listavis.model.clear()
+               var records = Visita.getAll()
                 for (var i = 0; i < records.length; i++) {
-                  console.log(records[i].id)
-                 listavis.model.append({id: qsTr(records[i].id) /*records[i].id*/,reqneg:"1"/*records[i].reqnegocio*/})
-               // listavis.model.append({id:records.rows.item(12).id,reqneg:records.rows.item(12).reqnegocio})
-               // listavis.model.append({id:records.rows.item(10).id,reqneg:records.rows.item(10).reqnegocio})
-               // listavis.model.append({id:records.rows.item(9).id,reqneg:records.rows.item(9).reqnegocio})
+                 //console.log(records[i].id)
+                 //console.log(records[i].reqnegocio)
+                 listavis.model.append({id:records[i].id ,vistante:records[i].visitante,visitado:records[i].visitado,estado:records[i].estado,efectividad:records[i].efectividad})
                 }
 
         }}
@@ -49,10 +74,10 @@ ApplicationWindow {
         id: tabBar
         currentIndex: swipeView.currentIndex
         TabButton {
-            text: qsTr("Registrar Visitas")
+             text: qsTr("Inicio")
         }
         TabButton {
-            text: qsTr("Realizar Visitas")
+            text: qsTr("Registrar Visitas")
         }
         TabButton {
             text: qsTr("Reporte de Visitas")

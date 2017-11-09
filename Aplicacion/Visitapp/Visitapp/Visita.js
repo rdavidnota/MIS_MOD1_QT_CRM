@@ -9,12 +9,21 @@ function getAll() {
     var db = Db.dbGetHandle();
 
     db.transaction(function (tx) {
-        var results = tx.executeSql('SELECT ID, FECHA, OBJETIVO, ALCANCE, REQNEGOCIO, ESTADO, EFECTIVIDAD FROM VISITA ORDER BY ID;');
+        var results = tx.executeSql('SELECT ID, FECHA, OBJETIVO, ALCANCE, REQNEGOCIO, ESTADO, EFECTIVIDAD, VR.IDPERSONA VISITANTE , VS.IDPERSONA VISITADO FROM VISITA V ,VISTADORES VR, VISITADOS VS WHERE VR.IDVISITA = V.ID AND VS.IDVISITA = V.ID ORDER BY ID;');
 
         for (var i = 0; i < results.rows.length; i++) {
-            var record ={
-                id: results.rows.item(i).id,                
-                reqnegocio: results.rows.item(i).reqnegocio,
+           // console.log(results.rows.item(i).ID)
+           // console.log(results.rows.item(i).REQNEGOCIO)
+            var record ={                
+                id: results.rows.item(i).ID,
+                fecha: results.rows.item(i).FECHA,
+                objetivo: results.rows.item(i).OBJETIVO,
+                alcanse: results.rows.item(i).ALCANCE,
+                reqnegocio: results.rows.item(i).REQNEGOCIO,
+                estado: results.rows.item(i).ESTADO,
+                efectividad: results.rows.item(i).EFECTIVIDAD,
+                visitante: results.rows.item(i).VISITANTE,
+                visitado: results.rows.item(i).VISITADO
               /*  telefono: results.rows.item(i).telefono,
                 correo: results.rows.item(i).correo*/
             }
@@ -28,6 +37,7 @@ function getAll() {
 function insert(fecha, objetivo, alcance, reqnegocio, estado, efectividad, visitadores, visitados){
     var db = Db.dbGetHandle();
     var visitaId = 0;
+    //console.log(fecha, objetivo, alcance, reqnegocio, estado, efectividad, visitadores, visitados)
     db.transaction(function(tx){
         tx.executeSql('INSERT INTO VISITA VALUES(NULL,?,?,?,?,?,?);',[fecha, objetivo, alcance, reqnegocio, estado, efectividad])
 
@@ -42,8 +52,9 @@ function insert(fecha, objetivo, alcance, reqnegocio, estado, efectividad, visit
        /* for(var i = 0; i<visitados.rows.length; i++){
             tx.executeSql('INSERT INTO VISITADOS VALUES(?,?);',[visitados.rows.item(i), visitaId])
         }*/
-         tx.executeSql('INSERT INTO VISITADOS VALUES(?,?);',[visitados, visitaId])
-    });
+         tx.executeSql('INSERT INTO VISITADOS VALUES(?,?);',[visitados, visitaId])        
+    });    
+    return visitaId
 }
 
 function update(id, objetivo, alcance, estado, efectividad){

@@ -16,17 +16,34 @@ Item {
         anchors.topMargin: 21
         anchors.top: parent.top
     }*/
+    Text {
+        id: text1
+        x: 88
+        y: 8
+        width: 105
+        height: 18
+        color: "#000000"
+        text: qsTr("Reporte de Visitas")
+        font.bold: true
+        styleColor: "#000000"
+        font.pixelSize: 15
+    }
 
 
     ListView {
         id: listavisitas
+        anchors.rightMargin: 302
+        anchors.bottomMargin: 0
+        anchors.topMargin: 32
+        anchors.leftMargin: 0
         anchors.fill: parent
         model: ListModel{}
         delegate: Label {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: 50
-            text: id + ": " + reqneg
+            //anchors.left: parent.left
+            //anchors.right: parent.right
+            height: 20
+            text: id + ": " + vistante + ": " + visitado + ": " + estado + ": " + efectividad
+
         }
     }
 
